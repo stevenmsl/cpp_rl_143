@@ -27,13 +27,17 @@ void Solution::reorderList(Node *head)
   while (fast != nullptr && fast->next != nullptr)
     slow = slow->next, fast = fast->next->next;
 
-  /* slow should now point to the center */
+  /* slow should now point to the center
+     - why not reverse(slow) but reverse(slow->next) ?
+     - we need to cut the tie easily after breaking
+       the list into two
+  */
   auto r = reverse(slow->next);
 
   /*cut it off; so the two lists are completely
     separated
-    - this is a very important step and can
-      be easily ignored
+    - this is step can be easily forgotten and
+      result in confusing bugs
   */
 
   slow->next = nullptr;
